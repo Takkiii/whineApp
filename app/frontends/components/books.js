@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class Posts extends React.Component {
+class Books extends React.Component {
 	render() {
-		const headers = ["タイトル", "著者", "言語", "出版年", "売上部数",]
+		const headers = ["タイトル", "著者", "出版年",]
 		return (
 			<div>
-				<h1>WhineApp</h1>
+				<h1>BookApp</h1>
 				<table>
 					<thead>
 						<tr>
@@ -24,6 +24,6 @@ class Posts extends React.Component {
 }
 
 ReactDOM.render(
-	<Posts />,
-	document.getElementById("posts")
+	<Books />,
+	document.getElementById("books")
 )
