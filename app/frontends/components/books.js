@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import request from 'superagent'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
+import {Card, CardHeader} from 'material-ui/Card'
 
 class Books extends React.Component {
 	constructor() {
@@ -33,33 +36,35 @@ class Books extends React.Component {
 		const {books} = this.state
 		const headers = books[0] != null ? Object.keys(books[0]) : []
 		return (
-			<div>
-				<h1>BookApp</h1>
-				<table>
-					<thead>
-						<tr>
-							{headers.map((header, index) => {
+			<MuiThemeProvider>
+				<Card>
+					<CardHeader title="BookApp" />
+					<Table>
+				    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+				      <TableRow>
+				      	{headers.map((header, index) => {
+									return (
+										<TableHeaderColumn key={index}>{header}</TableHeaderColumn>
+									)
+								})}
+				      </TableRow>
+				    </TableHeader>
+				    <TableBody displayRowCheckbox={false}>
+				    	{books.map((book, index) => {
 								return (
-									<th key={index}>{header}</th>
+									<TableRow key={index}>
+										{Object.values(book).map((row, index) => {
+											return (
+												<TableRowColumn key={index}>{row}</TableRowColumn>
+											)
+										})}
+						      </TableRow>
 								)
 							})}
-						</tr>
-					</thead>
-					<tbody>
-						{books.map((book, index) => {
-							return (
-								<tr key={index}>
-									{Object.values(book).map((row, index) => {
-										return (
-											<td key={index}>{row}</td>
-										)
-									})}
-								</tr>
-							)
-						})}
-					</tbody>
-				</table>
-			</div>
+				    </TableBody>
+				  </Table>
+				</Card>
+			</MuiThemeProvider>
 		)
 	}
 }
