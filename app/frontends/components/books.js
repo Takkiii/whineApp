@@ -32,6 +32,14 @@ class Books extends React.Component {
 			})
 	}
 
+	sortTable(proxy, rowNumber, columnId) {
+		const data = Array.from(this.state.books)
+		data.sort((a, b) => {
+			return Object.values(a)[columnId] > Object.values(b)[columnId] ? 1 : -1
+		})
+		this.setState({books: data})
+	}
+
 	render() {
 		const {books} = this.state
 		const headers = books[0] != null ? Object.keys(books[0]) : []
@@ -41,7 +49,7 @@ class Books extends React.Component {
 					<CardHeader title="BookApp" />
 					<Table>
 				    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-				      <TableRow>
+				      <TableRow onCellClick={this.sortTable.bind(this)}>
 				      	{headers.map((header, index) => {
 									return (
 										<TableHeaderColumn key={index}>{header}</TableHeaderColumn>
